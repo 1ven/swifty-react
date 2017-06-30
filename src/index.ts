@@ -1,1 +1,1 @@
-export { default as connect } from "./connect";
+export { connect } from "./connect";
