@@ -1,6 +1,6 @@
-import { Stream } from "most";
+import { Stream, combineArray } from "most";
 import { ComponentEnhancer, mapPropsStream } from "recompose";
-import { createModel, combineReducers, Reducer } from "swifty";
+import { createModel, Reducer } from "swifty";
 import { Transformer } from "./types";
 
 /**
@@ -14,12 +14,9 @@ export default <TInner, TOuter>(
   reducers: Reducer<any>[],
   transform: Transformer<TInner, TOuter>
 ) =>
-  mapPropsStream<TInner, TOuter>((ownProps$: Stream<TInner>) => {
-    // TODO: Replace by `combineArray`?
-    const model$ = createModel(combineReducers({ ...reducers } as any));
-    return model$.combine(
-      (data, ownProps) =>
-        transform(ownProps, reducers.map((_, i: number) => data[i])),
-      ownProps$
-    );
-  });
+  mapPropsStream<TInner, TOuter>((ownProps$: Stream<TInner>) =>
+    combineArray(
+      (ownProps: TInner, ...stateList) => transform(ownProps, stateList),
+      [ownProps$, ...reducers.map(createModel)]
+    )
+  );
