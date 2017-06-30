@@ -4,27 +4,27 @@ import { createModel, Reducer } from "swifty";
 
 export function connect<TInner, TOuter, S1>(
   reducers: [Reducer<S1>],
-  transform: (ownProps: TInner, stateList: [S1]) => TOuter
+  transform: (stateList: [S1], ownProps?: TInner) => TOuter
 ): ComponentEnhancer<TInner, TOuter>;
 
 export function connect<TInner, TOuter, S1, S2>(
   reducers: [Reducer<S1>, Reducer<S2>],
-  transform: (ownProps: TInner, stateList: [S1, S2]) => TOuter
+  transform: (stateList: [S1, S2], ownProps?: TInner) => TOuter
 ): ComponentEnhancer<TInner, TOuter>;
 
 export function connect<TInner, TOuter, S1, S2, S3>(
   reducers: [Reducer<S1>, Reducer<S2>, Reducer<S3>],
-  transform: (ownProps: TInner, stateList: [S1, S2, S3]) => TOuter
+  transform: (stateList: [S1, S2, S3], ownProps?: TInner) => TOuter
 ): ComponentEnhancer<TInner, TOuter>;
 
 export function connect<TInner, TOuter, S1, S2, S3, S4>(
   reducers: [Reducer<S1>, Reducer<S2>, Reducer<S3>, Reducer<S4>],
-  transform: (ownProps: TInner, stateList: [S1, S2, S3, S4]) => TOuter
+  transform: (stateList: [S1, S2, S3, S4], ownProps?: TInner) => TOuter
 ): ComponentEnhancer<TInner, TOuter>;
 
 export function connect<TInner, TOuter, S1, S2, S3, S4, S5>(
   reducers: [Reducer<S1>, Reducer<S2>, Reducer<S3>, Reducer<S4>, Reducer<S5>],
-  transform: (ownProps: TInner, stateList: [S1, S2, S3, S4, S5]) => TOuter
+  transform: (stateList: [S1, S2, S3, S4, S5], ownProps?: TInner) => TOuter
 ): ComponentEnhancer<TInner, TOuter>;
 
 /**
@@ -36,7 +36,7 @@ export function connect<TInner, TOuter, S1, S2, S3, S4, S5>(
  */
 export function connect(reducers, transform) {
   return mapPropsStream(ownProps$ =>
-    combineArray((ownProps, ...stateList) => transform(ownProps, stateList), [
+    combineArray((ownProps, ...stateList) => transform(stateList, ownProps), [
       ownProps$,
       ...reducers.map(createModel)
     ])
