@@ -3146,9 +3146,9 @@ supports-color@^3.1.0, supports-color@^3.1.2:
   dependencies:
     has-flag "^1.0.0"
 
-swifty@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/swifty/-/swifty-0.0.5.tgz#2d95c9552402995f842b1a17987ff428dd5ecc4a"
+swifty@^0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/swifty/-/swifty-0.0.12.tgz#d1d6af9194079f87bf734980050fd15e5bfbfa4a"
   dependencies:
     most "^1.5.0"
     most-subject "^5.3.0"

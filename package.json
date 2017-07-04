@@ -7,7 +7,8 @@
   "license": "MIT",
   "files": [
     "dist",
-    "lib"
+    "lib",
+    "src"
   ],
   "devDependencies": {
     "@types/recompose": "^0.23.1",
@@ -16,7 +17,9 @@
     "jest": "^20.0.4",
     "lint-staged": "^4.0.0",
     "prettier": "^1.4.4",
+    "react": "^15.6.1",
     "rimraf": "^2.6.1",
+    "swifty": "^0.0.12",
     "ts-jest": "^20.0.6",
     "ts-loader": "^2.1.0",
     "typescript": "^2.3.4",
@@ -53,10 +56,6 @@
   },
   "dependencies": {
     "most": "^1.5.0",
-    "recompose": "^0.23.5",
-    "swifty": "^0.0.5"
-  },
-  "peerDependencies": {
-    "react": "^15.6.1"
+    "recompose": "^0.23.5"
   }
 }
