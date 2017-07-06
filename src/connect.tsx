@@ -1,6 +1,9 @@
 import { combineArray } from "most";
-import { ComponentEnhancer, mapPropsStream } from "recompose";
 import { createModel, Reducer } from "swifty";
+import { mapPropsStreamWithConfig, ComponentEnhancer } from "recompose";
+import mostConfig from "recompose/mostObservableConfig";
+
+const mapPropsStream = mapPropsStreamWithConfig(mostConfig);
 
 function connect<TInner, TOuter, S1>(
   reducers: [Reducer<S1>],
@@ -36,10 +39,13 @@ function connect<TInner, TOuter, S1, S2, S3, S4, S5>(
  */
 function connect(reducers, transform) {
   return mapPropsStream(ownProps$ =>
-    combineArray((ownProps, ...stateList) => transform(stateList, ownProps), [
-      ownProps$,
-      ...reducers.map(createModel)
-    ])
+    combineArray(
+      (ownProps, ...stateList) => ({
+        ...ownProps,
+        ...transform(stateList, ownProps)
+      }),
+      [ownProps$, ...reducers.map(createModel)]
+    )
   );
 }
 
